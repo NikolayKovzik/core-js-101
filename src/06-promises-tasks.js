@@ -30,6 +30,13 @@
  */
 function willYouMarryMe(/* isPositiveAnswer */) {
   throw new Error('Not implemented');
+  // return new Promise((isPositiveAnswer) => {
+  //   if(isPositiveAnswer) {
+  //     resolve(isPositiveAnswer);
+  //   } else {
+  //     reject(isPositiveAnswer);
+  //   }
+  // })
 }
 
 
