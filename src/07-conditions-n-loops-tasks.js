@@ -279,8 +279,20 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const arr = [...ccn.toString()].map((item) => +item).reverse();
+  const num = arr.reduce((acc, value, index) => {
+    let val = value;
+    if (index % 2 !== 0) {
+      val *= 2;
+      if (val > 9) {
+        val = [...val.toString()].map((item) => +item);
+        val = val[0] + val[1];
+      }
+    }
+    return acc + val;
+  }, 0);
+  return num % 10 === 0;
 }
 
 /**
@@ -385,14 +397,16 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
-  // const commonPath = [];
-  // const folders = pathes.map((path) => path.split('/'));
-  // for (let i = 0; i < folders.length; i++) {
-  //   let isCommon = false;
-  //   folders[i]
-  // }
+function getCommonDirectoryPath(pathes) {
+  let folders = pathes[0];
+  for (let i = 1; i < pathes.length; i += 1) {
+    for (let j = 0; j < folders.length; j += 1) {
+      if (folders[j] !== pathes[i][j]) {
+        folders = folders.substring(0, j);
+      }
+    }
+  }
+  return folders.substring(0, folders.lastIndexOf('/') + 1);
 }
 
 
